@@ -26,7 +26,7 @@
     nixpkgs,
     ...
   } @ inputs:
-    flake-utils.lib.eachDefaultSystem (
+    flake-utils.lib.eachSystem ["x86_64-linux"] (
       system: let
         dhall-haskell = import "${inputs.dhall-haskell}/nix/shared.nix" {
           inherit system;
