@@ -26,7 +26,9 @@
     nixpkgs,
     ...
   } @ inputs:
-    flake-utils.lib.eachSystem ["x86_64-linux"] (
+    flake-utils.lib.eachSystem [
+      "x86_64-linux"
+    ] (
       system: let
         dhall-haskell = import "${inputs.dhall-haskell}/nix/shared.nix" {
           inherit system;
@@ -36,7 +38,22 @@
           inherit system;
         };
       in {
-        packages.dhall-lsp-server = dhall-haskell.dhall-lsp-server;
+        packages = {
+          inherit
+            (dhall-haskell)
+            dhall
+            dhall-bash
+            dhall-csv
+            dhall-docs
+            dhall-json
+            dhall-lsp-server
+            dhall-nix
+            dhall-nixpkgs
+            dhall-openapi
+            dhall-toml
+            dhall-yaml
+            ;
+        };
       }
     );
 }
