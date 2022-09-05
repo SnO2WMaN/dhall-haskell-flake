@@ -38,7 +38,7 @@
           inherit system;
         };
       in {
-        packages = {
+        packages = builtins.mapAttrs (name: value: pkgs.haskell.lib.dontCheck value) {
           inherit
             (dhall-haskell)
             dhall
